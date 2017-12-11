@@ -1,19 +1,20 @@
 import math
 
-dataset = [{"Outlook": "Sunny",    "Temperature": "Hot",   "Humidity": "High",     "Wind": "Weak",    "Tennis": "No"},
-           {"Outlook": "Sunny",    "Temperature": "Hot",   "Humidity": "High",     "Wind": "Strong",  "Tennis": "No"},
-           {"Outlook": "Overcast", "Temperature": "Hot",   "Humidity": "High",     "Wind": "Weak",    "Tennis": "Yes"},
-           {"Outlook": "Rain",     "Temperature": "Mild",  "Humidity": "High",     "Wind": "Weak",    "Tennis": "Yes"},
-           {"Outlook": "Rain",     "Temperature": "Cool",  "Humidity": "Normal",   "Wind": "Weak",    "Tennis": "Yes"},
-           {"Outlook": "Rain",     "Temperature": "Cool",  "Humidity": "Normal",   "Wind": "Strong",  "Tennis": "No"},
-           {"Outlook": "Overcast", "Temperature": "Cool",  "Humidity": "Normal",   "Wind": "Strong",  "Tennis": "Yes"},
-           {"Outlook": "Sunny",    "Temperature": "Mild",  "Humidity": "High",     "Wind": "Weak",    "Tennis": "No"},
-           {"Outlook": "Sunny",    "Temperature": "Cool",  "Humidity": "Normal",   "Wind": "Weak",    "Tennis": "Yes"},
-           {"Outlook": "Rain",     "Temperature": "Mild",  "Humidity": "Normal",   "Wind": "Weak",    "Tennis": "Yes"},
-           {"Outlook": "Sunny",    "Temperature": "Mild",  "Humidity": "Normal",   "Wind": "Strong",  "Tennis": "Yes"},
-           {"Outlook": "Overcast", "Temperature": "Mild",  "Humidity": "High",     "Wind": "Strong",  "Tennis": "Yes"},
-           {"Outlook": "Overcast", "Temperature": "Hot",   "Humidity": "Normal",   "Wind": "Weak",    "Tennis": "Yes"},
-           {"Outlook": "Rain",     "Temperature": "Mild",  "Humidity": "High",     "Wind": "Strong",  "Tennis": "No"}]
+attributes = ["Outlook",    "Temperature",  "Humidity",     "Wind",     "Tennis"]
+dataset =   [["Sunny",      "Hot",          "High",         "Weak",     "No"],
+             ["Sunny",      "Hot",          "High",         "Strong",   "No"],
+             ["Overcast",   "Hot",          "High",         "Weak",     "Yes"],
+             ["Rain",       "Mild",         "High",         "Weak",     "Yes"],
+             ["Rain",       "Cool",         "Normal",       "Weak",     "Yes"],
+             ["Rain",       "Cool",         "Normal",       "Strong",   "No"],
+             ["Overcast",   "Cool",         "Normal",       "Strong",   "Yes"],
+             ["Sunny",      "Mild",         "High",         "Weak",     "No"],
+             ["Sunny",      "Cool",         "Normal",       "Weak",     "Yes"],
+             ["Rain",       "Mild",         "Normal",       "Weak",     "Yes"],
+             ["Sunny",      "Mild",         "Normal",       "Strong",   "Yes"],
+             ["Overcast",   "Mild",         "High",         "Strong",   "Yes"],
+             ["Overcast",   "Hot",          "Normal",       "Weak",     "Yes"],
+             ["Rain",       "Mild",         "High",         "Strong",   "No"]]
 
 
 def find(item, lst):
@@ -143,8 +144,9 @@ def make_decision_tree(data, attributes, target):
     :param target:
     :return:
     """
-    vals = [record[attributes.index(target)] for record in [row for row in data]]
+
     # Possible values of the target attribute
+    vals = [record[attributes.index(target)] for record in data]
     default = majority(attributes, data, target)
 
     if not data or (len(attributes) - 1) <= 0:
@@ -166,15 +168,4 @@ def make_decision_tree(data, attributes, target):
 
 
 if __name__ == "__main__":
-    attributes = [attr for attr in dataset[0]]
-
-    data = []
-    for entry in dataset:
-        row = []
-        for key in entry:
-            row.append(entry[key])
-
-        data.append(row)
-
-    target = attributes[0]
-    print(make_decision_tree(data, attributes, target))
+    print(make_decision_tree(dataset, attributes, attributes[0]))
